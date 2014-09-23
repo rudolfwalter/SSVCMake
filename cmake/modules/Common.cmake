@@ -3,7 +3,7 @@ macro(SSVCMake_setDefaultSettings)
 
 	set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type.")
 	set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/;${CMAKE_MODULE_PATH}")
-endmacro(SSVCMake_setDefaultFlags)
+endmacro(SSVCMake_setDefaultSettings)
 
 macro(SSVCMake_setDefaultFlags)
 	message("SSVCMake: setting default flags")
@@ -20,6 +20,8 @@ macro(SSVCMake_setDefaultFlags)
 endmacro(SSVCMake_setDefaultFlags)
 
 macro(SSVCMake_setDefaultGlobs)
+	message("SSVCMake: setting default globs")
+
 	set(INC_DIR "include")
 	set(SRC_DIR "src")
 	file(GLOB_RECURSE SRC_LIST "${INC_DIR}/*" "${SRC_DIR}/*")
