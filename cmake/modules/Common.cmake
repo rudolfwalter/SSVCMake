@@ -29,11 +29,13 @@ endmacro(SSVCMake_setDefaultGlobs)
 
 macro(SSVCMake_findExtlib mExtlib)
 	message("SSVCMake: finding ${mExtlib}")
-	message("INC TEST : ${string(TOUPPER "${mExtlib}_INCLUDE_DIR")})
+
+	string(TOUPPER "${mExtlib}" ${mExtlib}_UPPER)
+	message("INC TEST : ${${mExtlib}_UPPER}")
 
 	set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/extlibs/${mExtlib}/cmake/modules/;${CMAKE_MODULE_PATH}")
 	find_package("${mExtlib}" REQUIRED)
-	include_directories(${string(TOUPPER "${mExtlib}_INCLUDE_DIR")})
+	#include_directories()
 endmacro(SSVCMake_findExtlib)
 
 macro(SSVCMake_setDefaults)
