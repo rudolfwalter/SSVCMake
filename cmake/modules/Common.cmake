@@ -3,6 +3,10 @@ macro(SSVCMake_setDefaultSettings)
 
 	set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type.")
 	set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/;${CMAKE_MODULE_PATH}")
+	set(INC_DIR "include")
+	set(SRC_DIR "src")
+	include_directories("./")
+	include_directories("./${INC_DIR}")
 endmacro(SSVCMake_setDefaultSettings)
 
 macro(SSVCMake_setDefaultFlags)
@@ -22,8 +26,7 @@ endmacro(SSVCMake_setDefaultFlags)
 macro(SSVCMake_setDefaultGlobs)
 	message("SSVCMake: setting default globs")
 
-	set(INC_DIR "include")
-	set(SRC_DIR "src")
+	
 	file(GLOB_RECURSE SRC_LIST "${INC_DIR}/*" "${SRC_DIR}/*")
 endmacro(SSVCMake_setDefaultGlobs)
 
@@ -58,4 +61,15 @@ macro(SSVCMake_findSFML)
 		set(SFML_AUDIO_LIBRARY "" CACHE STRING "SFML2 Audio library file")
 		message("\n-> SFML directory not found. Set include and libraries manually.")
 	endif()
+	include_directories(${SFML_INCLUDE_DIR})
 endmacro(SSVCMake_findSFML)
+
+macro(SSVCMake_linkSFML)
+	message("SSVCMake: linking SFML")
+
+	target_link_libraries(${PROJECT_NAME} ${SFML_AUDIO_LIBRARY})
+	target_link_libraries(${PROJECT_NAME} ${SFML_GRAPHICS_LIBRARY})
+	target_link_libraries(${PROJECT_NAME} ${SFML_WINDOW_LIBRARY})
+	target_link_libraries(${PROJECT_NAME} ${SFML_SYSTEM_LIBRARY})
+	target_link_libraries(${PROJECT_NAME} ${SFML_NETWORK_LIBRARY})
+endmacro(SSVCMake_linkSFML)
