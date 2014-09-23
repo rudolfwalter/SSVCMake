@@ -34,6 +34,14 @@ macro(SSVCMake_findExtlib mExtlib)
 	find_package("${mExtlib}" REQUIRED)
 endmacro(SSVCMake_findExtlib)
 
+macro(SSVCMake_setDefaults)
+	message("SSVCMake: setting all defaults")
+
+	SSVCMake_setDefaultSettings()
+	SSVCMake_setDefaultFlags()
+	SSVCMake_setDefaultGlobs()
+endmacro(SSVCMake_setDefaults)
+
 macro(SSVCMake_findSFML)
 	message("SSVCMake: finding SFML")
 
