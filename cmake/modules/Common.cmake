@@ -73,3 +73,11 @@ macro(SSVCMake_linkSFML)
 	target_link_libraries(${PROJECT_NAME} ${SFML_SYSTEM_LIBRARY})
 	target_link_libraries(${PROJECT_NAME} ${SFML_NETWORK_LIBRARY})
 endmacro(SSVCMake_linkSFML)
+
+macro(SSVCMake_setAndInstallHeaderOnly)
+	message("SSVCMake: setting up and installing as header-only library")
+
+	add_library(HEADER_ONLY_TARGET STATIC ${SRC_LIST})
+	set_target_properties(HEADER_ONLY_TARGET PROPERTIES LINKER_LANGUAGE CXX)
+	install(DIRECTORY ${INC_DIR} DESTINATION .)
+endmacro(SSVCMake_setAndInstallHeaderOnly)
