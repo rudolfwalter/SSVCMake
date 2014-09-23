@@ -29,7 +29,23 @@ endmacro(SSVCMake_setDefaultGlobs)
 
 macro(SSVCMake_findExtlib mExtlib)
 	message("SSVCMake: finding ${mExtlib}")
-	
+
 	set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/extlibs/${mExtlib}/cmake/modules/;${CMAKE_MODULE_PATH}")
 	find_package("${mExtlib}" REQUIRED)
 endmacro(SSVCMake_findExtlib)
+
+macro(SSVCMake_findSFML)
+	message("SSVCMake: finding SFML, modules ${mExtlib}")
+
+	set(SFML_STATIC_LIBRARIES FALSE CACHE BOOL "Look for static SFML libraries.")
+	find_package(SFML 2.1 COMPONENTS audio graphics window system network)
+	if(NOT SFML_FOUND)
+		set(SFML_INCLUDE_DIR "" CACHE STRING "SFML2 include directory")
+		set(SFML_SYSTEM_LIBRARY "" CACHE STRING "SFML2 System library file")
+		set(SFML_WINDOW_LIBRARY "" CACHE STRING "SFML2 Window library file")
+		set(SFML_GRAPHICS_LIBRARY "" CACHE STRING "SFML2 Graphics library file")
+		set(SFML_NETWORK_LIBRARY "" CACHE STRING "SFML2 Network library file")
+		set(SFML_AUDIO_LIBRARY "" CACHE STRING "SFML2 Audio library file")
+		message("\n-> SFML directory not found. Set include and libraries manually.")
+	endif()
+endmacro(SSVCMake_findSFML)
