@@ -35,7 +35,7 @@ macro(SSVCMake_findExtlib mExtlib)
 endmacro(SSVCMake_findExtlib)
 
 macro(SSVCMake_findSFML)
-	message("SSVCMake: finding SFML, modules ${mExtlib}")
+	message("SSVCMake: finding SFML")
 
 	set(SFML_STATIC_LIBRARIES FALSE CACHE BOOL "Look for static SFML libraries.")
 	find_package(SFML 2.1 COMPONENTS audio graphics window system network)
