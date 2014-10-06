@@ -37,7 +37,7 @@ macro(SSVCMake_setDefaultFlags)
 #{
 	message("SSVCMake: setting default flags")
 
-	SSVCMake_setForceCacheIfNull(CMAKE_CXX_FLAGS "-std=c++1y -Wall -Wextra -Wpedantic -pthread")
+	SSVCMake_setForceCacheIfNull(CMAKE_CXX_FLAGS "-std=c++1y -Wall -Wextra -Wpedantic -pthread -Wfloat-equal -Wundef -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -Wswitch-default -Wconversion -Wunreachable-code")
 	SSVCMake_setForceCacheIfNull(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3")
 	SSVCMake_setForceCacheIfNull(CMAKE_CXX_FLAGS_DEBUG "-fno-omit-frame-pointer -g3")
 
