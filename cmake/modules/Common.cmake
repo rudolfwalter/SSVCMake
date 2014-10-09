@@ -16,6 +16,7 @@ macro(SSVCMake_setForceCacheIfNull mVar mX)
 		message("SSVCMake: ${mVar} forced to ${mX}")
 		set("${mVar}" "${mX}" CACHE STRING "" FORCE)
 	#}
+	endif()
 #}
 endmacro()
 
