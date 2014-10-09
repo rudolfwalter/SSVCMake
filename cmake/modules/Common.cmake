@@ -7,7 +7,7 @@ macro(SSVCMake_setForceCacheIfNull mVar mX)
 	#}
 	else()
 	#{
-		message("SSVCMake: ${mVar} was already set")
+		message("SSVCMake: ${mVar} was already set to: ${${mVar}}")
 	#}
 	endif()
 
