@@ -50,6 +50,12 @@ macro(SSVCMake_setDefaultFlags)
 		set(CMAKE_C_COMPILER "/usr/bin/clang")
 		set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
 	#}
+	else()
+	#{
+		message("SSVCMake: using gcc for compilation")
+		set(CMAKE_C_COMPILER "/usr/bin/gcc")
+		set(CMAKE_CXX_COMPILER "/usr/bin/g++")
+	#}
 	endif()
 
 	SSVCMake_setForceCacheIfNull(CMAKE_CXX_FLAGS "-std=c++1y -Wall -Wextra -Wpedantic -pthread -Wundef -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -Wunreachable-code")
