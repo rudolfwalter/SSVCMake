@@ -48,6 +48,7 @@ macro(SSVCMake_setDefaultFlags)
 		set(CMAKE_C_COMPILER "/usr/bin/clang")
 		set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
 	#}
+	endif()
 
 	SSVCMake_setForceCacheIfNull(CMAKE_CXX_FLAGS "-std=c++1y -Wall -Wextra -Wpedantic -pthread -Wundef -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -Wunreachable-code")
 	SSVCMake_setForceCacheIfNull(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3")
