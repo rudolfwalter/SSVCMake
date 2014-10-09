@@ -1,5 +1,3 @@
-# TODO: flag to force cache variables
-
 macro(SSVCMake_setForceCacheIfNull mVar mX)
 #{
 	if("${${mVar}}" STREQUAL "")	
@@ -12,6 +10,12 @@ macro(SSVCMake_setForceCacheIfNull mVar mX)
 		message("SSVCMake: ${mVar} was already set")
 	#}
 	endif()
+
+	if("${SSVCMAKE_FORCE_ALWAYS}")
+	#{
+		message("SSVCMake: ${mVar} forced to ${mX}")
+		set("${mVar}" "${mX}" CACHE STRING "" FORCE)
+	#}
 #}
 endmacro()
 
@@ -38,6 +42,12 @@ endmacro()
 macro(SSVCMake_setDefaultFlags)
 #{
 	message("SSVCMake: setting default flags")
+
+	if("${SSVCMAKE_USE_CLANG}")
+	#{
+		set(CMAKE_C_COMPILER "/usr/bin/clang")
+		set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
+	#}
 
 	SSVCMake_setForceCacheIfNull(CMAKE_CXX_FLAGS "-std=c++1y -Wall -Wextra -Wpedantic -pthread -Wundef -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -Wunreachable-code")
 	SSVCMake_setForceCacheIfNull(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3")
