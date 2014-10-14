@@ -63,6 +63,12 @@ macro(SSVCMake_setDefaultFlags)
 		set(CMAKE_CXX_FLAGS_DEBUG "${SSVCMAKE_CXX_FLAGS_DEBUG} -Og" CACHE STRING "" FORCE)
 	#}
 	endif()
+
+	if("${SSVCMAKE_PROFILE_COMPILATION}")
+	#{
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Q -ftime-report" CACHE STRING "" FORCE)
+	#}
+	endif()
 #}
 endmacro()
 
