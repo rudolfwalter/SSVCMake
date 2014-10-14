@@ -67,7 +67,7 @@ macro(SSVCMake_setDefaultFlags)
 	if("${SSVCMAKE_PROFILE_COMPILATION}")
 	#{
 		message("SSVCMake: profiling compilation")
-		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ftime-report" CACHE STRING "" FORCE)
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v -ftime-report" CACHE STRING "" FORCE)
 	#}
 	endif()
 #}
