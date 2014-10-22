@@ -1,3 +1,15 @@
+macro(SSVCMake_cleanCache)
+#{
+	set(CMAKE_BUILD_TYPE "" CACHE STRING "" FORCE)
+	set(CMAKE_CXX_FLAGS "" CACHE STRING "" FORCE)
+	set(CMAKE_CXX_FLAGS_RELEASE "" CACHE STRING "" FORCE)
+	set(CMAKE_CXX_FLAGS_DEBUG "" CACHE STRING "" FORCE)
+	set(SSVCMAKE_CXX_FLAGS_DEBUG "" CACHE STRING "" FORCE)
+#}
+endmacro()
+
+
+
 macro(SSVCMake_setForceCacheIfNull mVar mX)
 #{
 	if("${${mVar}}" STREQUAL "")	
@@ -99,11 +111,21 @@ endmacro()
 
 macro(SSVCMake_setDefaults)
 #{
-	message("SSVCMake: setting all defaults")
+	if("${SSVCMAKE_CLEAN_CACHE}")
+	#{
+		message("SSVCMake: cleaning cache")
 
-	SSVCMake_setDefaultSettings()
-	SSVCMake_setDefaultFlags()
-	SSVCMake_setDefaultGlobs()
+		SSVCMake_cleanCache()		
+	#}
+	else()
+	#{
+		message("SSVCMake: setting all defaults")
+
+		SSVCMake_setDefaultSettings()
+		SSVCMake_setDefaultFlags()
+		SSVCMake_setDefaultGlobs()
+	#}
+	endif()
 #}
 endmacro()
 
