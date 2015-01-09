@@ -103,6 +103,7 @@ macro(SSVCMake_setDefaultGlobs)
 		message("SSVCMake: globbing everything")	
 		file(GLOB_RECURSE SRC_LIST "${INC_DIR}/*" "${SRC_DIR}/*")
 	#}
+	endif()
 #}
 endmacro(SSVCMake_setDefaultGlobs)
 
