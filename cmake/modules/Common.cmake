@@ -92,7 +92,17 @@ endmacro()
 macro(SSVCMake_setDefaultGlobs)
 #{
 	message("SSVCMake: setting default globs")	
-	file(GLOB_RECURSE SRC_LIST "${INC_DIR}/*" "${SRC_DIR}/*")
+	
+	if("${SSVCMAKE_HEADERONLY}")
+	#{
+		message("SSVCMake: globbing only .hpp files")	
+		file(GLOB_RECURSE SRC_LIST "${INC_DIR}/*.hpp" "${SRC_DIR}/*.hpp")
+	#}
+	else()
+	#{
+		message("SSVCMake: globbing everything")	
+		file(GLOB_RECURSE SRC_LIST "${INC_DIR}/*" "${SRC_DIR}/*")
+	#}
 #}
 endmacro(SSVCMake_setDefaultGlobs)
 
@@ -175,6 +185,8 @@ endmacro()
 macro(SSVCMake_setAndInstallHeaderOnly)
 #{
 	message("SSVCMake: setting up and installing as header-only library")
+
+	set(SSVCMAKE_HEADERONLY TRUE)
 
 	add_library(HEADER_ONLY_TARGET STATIC ${SRC_LIST})
 	set_target_properties(HEADER_ONLY_TARGET PROPERTIES LINKER_LANGUAGE CXX)
