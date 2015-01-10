@@ -92,7 +92,7 @@ endmacro()
 macro(SSVCMake_setDefaultGlobs)
 #{
 	message("SSVCMake: setting default globs")	
-	file(GLOB_RECURSE SRC_LIST "${INC_DIR}/*" "${SRC_DIR}/*")
+	file(GLOB_RECURSE SRC_LIST "${INC_DIR}/*.hpp" "${SRC_DIR}/*.hpp")
 #}
 endmacro(SSVCMake_setDefaultGlobs)
 
@@ -176,8 +176,8 @@ macro(SSVCMake_setAndInstallHeaderOnly)
 #{
 	message("SSVCMake: setting up and installing as header-only library")
 
-	add_library(HEADER_ONLY_TARGET INTERFACE ${SRC_LIST})
-	#set_target_properties(HEADER_ONLY_TARGET)
+	add_library(HEADER_ONLY_TARGET STATIC ${SRC_LIST} dummy.cpp)
+	set_target_properties(HEADER_ONLY_TARGET PROPERTIES LINKER_LANGUAGE CXX)
 	install(DIRECTORY ${INC_DIR} DESTINATION .)
 #}
 endmacro()
