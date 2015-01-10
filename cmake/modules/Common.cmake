@@ -176,7 +176,7 @@ macro(SSVCMake_setAndInstallHeaderOnly)
 #{
 	message("SSVCMake: setting up and installing as header-only library")
 
-	add_library(HEADER_ONLY_TARGET STATIC ${SRC_LIST} dummy.cpp)
+	add_library(HEADER_ONLY_TARGET STATIC ${SRC_LIST} "${INC_DIR}/dummy.cpp")
 	set_target_properties(HEADER_ONLY_TARGET PROPERTIES LINKER_LANGUAGE CXX)
 	install(DIRECTORY ${INC_DIR} DESTINATION .)
 #}
