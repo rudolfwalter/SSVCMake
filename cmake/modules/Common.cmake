@@ -58,7 +58,7 @@ macro(SSVCMake_setDefaultFlags)
 #{
 	message("SSVCMake: setting default flags")
 
-	SSVCMake_setForceCacheIfNull(CMAKE_CXX_FLAGS "-std=c++1y -Werror -Wall -Wextra -Wpedantic -pthread -Wundef -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -Wunreachable-code")
+	SSVCMake_setForceCacheIfNull(CMAKE_CXX_FLAGS "-std=c++1y -Wall -Wextra -Wpedantic -pthread -Wundef -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -Wunreachable-code")
 	SSVCMake_setForceCacheIfNull(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3")
 	SSVCMake_setForceCacheIfNull(SSVCMAKE_CXX_FLAGS_DEBUG "-fno-omit-frame-pointer -g3")
 	
@@ -175,7 +175,6 @@ endmacro()
 macro(SSVCMake_setAndInstallHeaderOnly)
 #{
 	message("SSVCMake: setting up and installing as header-only library")
-
 
 	set_source_files_properties(${SRC_LIST} PROPERTIES HEADER_FILE_ONLY 1)
 	add_library(HEADER_ONLY_TARGET STATIC ${SRC_LIST})
