@@ -58,7 +58,7 @@ macro(SSVCMake_setDefaultFlags)
 #{
 	message("SSVCMake: setting default flags")
 
-	if("${SSVCMAKE_FAST_COMPILE}")
+	if("${CMAKE_BUILD_TYPE}" STREQUAL "WIP")
 	#{
 		SSVCMake_setForceCacheIfNull(CMAKE_CXX_FLAGS "-std=c++1y -O0")		
 	#}
@@ -67,22 +67,6 @@ macro(SSVCMake_setDefaultFlags)
 		SSVCMake_setForceCacheIfNull(CMAKE_CXX_FLAGS "-std=c++1y -Wall -Wextra -Wpedantic -pthread -Wundef -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -Wunreachable-code")
 		SSVCMake_setForceCacheIfNull(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3")
 		SSVCMake_setForceCacheIfNull(SSVCMAKE_CXX_FLAGS_DEBUG "-fno-omit-frame-pointer -g3")
-	#}
-	endif()
-
-	if("${SSVCMAKE_USE_CLANG}")
-	#{
-		message("SSVCMake: using clang for compilation")
-		set(CMAKE_C_COMPILER "/usr/bin/clang")
-		set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
-		set(CMAKE_CXX_FLAGS_DEBUG "${SSVCMAKE_CXX_FLAGS_DEBUG} -O0")
-	#}
-	else()
-	#{
-		message("SSVCMake: using gcc for compilation")
-		set(CMAKE_C_COMPILER "/usr/bin/gcc")
-		set(CMAKE_CXX_COMPILER "/usr/bin/g++")
-		set(CMAKE_CXX_FLAGS_DEBUG "${SSVCMAKE_CXX_FLAGS_DEBUG} -Og")
 	#}
 	endif()
 
