@@ -36,6 +36,15 @@ endmacro()
 
 
 
+macro(SSVCMake_setForceCache mVar mX)
+#{
+	message("SSVCMake: force-setting ${mVar}to ${mX}")
+	set("${mVar}" "${mX}" CACHE STRING "" FORCE)
+#}
+endmacro()
+
+
+
 macro(SSVCMake_setDefaultSettings)
 #{
 	message("SSVCMake: setting default settings")
@@ -60,15 +69,17 @@ macro(SSVCMake_setDefaultFlags)
 
 	if("${CMAKE_BUILD_TYPE}" STREQUAL "WIP")
 	#{
-		SSVCMake_setForceCacheIfNull(CMAKE_CXX_FLAGS "-std=c++1y -O0")		
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "-std=c++1y -O0 -Wall -Wextra -Wpedantic -pthread")		
 	#}
 	else()
 	#{
-		SSVCMake_setForceCacheIfNull(CMAKE_CXX_FLAGS "-std=c++1y -Wall -Wextra -Wpedantic -pthread -Wundef -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -Wunreachable-code")
-		SSVCMake_setForceCacheIfNull(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3")
-		SSVCMake_setForceCacheIfNull(SSVCMAKE_CXX_FLAGS_DEBUG "-fno-omit-frame-pointer -g3")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "-std=c++1y -Wall -Wextra -Wpedantic -pthread -Wundef -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -Wunreachable-code")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3")
+		SSVCMake_setForceCache(SSVCMAKE_CXX_FLAGS_DEBUG "-fno-omit-frame-pointer -g3")
 	#}
 	endif()
+
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SSVCMAKE_EXTRA_FLAGS}")
 
 	if("${SSVCMAKE_PROFILE_COMPILATION}")
 	#{
