@@ -69,11 +69,11 @@ macro(SSVCMake_setDefaultFlags)
 
 	if("${CMAKE_BUILD_TYPE}" STREQUAL "WIP")
 	#{
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "-std=c++1y -O0 -Wall -Wextra -Wpedantic -pthread")		
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "-std=c++1y -O0 -Wall -Wextra -Wpedantic -Wundef -Wshadow -pthread -wmissing-field-initializers")		
 	#}
 	else()
 	#{
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "-std=c++1y -Wall -Wextra -Wpedantic -pthread -Wundef -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -Wunreachable-code")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "-std=c++1y -Wall -Wextra -Wpedantic -pthread -Wundef -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -Wunreachable-code -missing-field-initializers")
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3")
 		SSVCMake_setForceCache(SSVCMAKE_CXX_FLAGS_DEBUG "-fno-omit-frame-pointer -g3")
 	#}
