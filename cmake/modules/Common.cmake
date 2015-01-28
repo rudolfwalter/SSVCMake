@@ -38,7 +38,7 @@ endmacro()
 
 macro(SSVCMake_setForceCache mVar mX)
 #{
-	message("SSVCMake: force-setting ${mVar}to ${mX}")
+	message("SSVCMake: force-setting ${mVar} to ${mX}")
 	set("${mVar}" "${mX}" CACHE STRING "" FORCE)
 #}
 endmacro()
@@ -73,7 +73,7 @@ macro(SSVCMake_setDefaultFlags)
 	#}
 	else()
 	#{
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "-std=c++1y -Wall -Wextra -Wpedantic -pthread -Wundef -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -Wno-unreachable-code -wmissing-field-initializers")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "-std=c++1y -Wall -Wextra -Wpedantic -pthread -Wundef -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -Wno-unreachable-code -Wno-missing-field-initializers")
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3")
 		SSVCMake_setForceCache(SSVCMAKE_CXX_FLAGS_DEBUG "-fno-omit-frame-pointer -g3")
 	#}
