@@ -105,7 +105,7 @@ macro(SSVCMake_findExtlib mExtlib)
 #{
 	message("SSVCMake: finding ${mExtlib}")
 
-	set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/extlibs/${mExtlib}/cmake/modules/;${CMAKE_MODULE_PATH}")
+	set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/../${mExtlib}/cmake/modules/;${CMAKE_SOURCE_DIR}/extlibs/${mExtlib}/cmake/modules/;${CMAKE_MODULE_PATH}")
 	find_package("${mExtlib}" REQUIRED)
 	string(TOUPPER "${mExtlib}" ${mExtlib}_UPPER)	
 	include_directories("${${${mExtlib}_UPPER}_INCLUDE_DIR}")
