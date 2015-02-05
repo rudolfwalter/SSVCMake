@@ -14,7 +14,7 @@ endmacro()
 
 macro(SSVCMake_setForceCacheIfNull mVar mX)
 #{
-	if("${${mVar}}" STREQUAL "")	
+	if("${${mVar}}" STREQUAL "")
 	#{
 		message("SSVCMake: ${mVar} was null, setting it to ${mX}")
 		set("${mVar}" "${mX}" CACHE STRING "" FORCE)
@@ -52,7 +52,7 @@ macro(SSVCMake_setDefaultSettings)
 	SSVCMake_setForceCacheIfNull(CMAKE_BUILD_TYPE Release)
 
 	set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/;${CMAKE_MODULE_PATH}")
-	
+
 	set(INC_DIR "include" CACHE STRING "")
 	set(SRC_DIR "src" CACHE STRING "")
 
@@ -69,7 +69,7 @@ macro(SSVCMake_setDefaultFlags)
 
 	if("${CMAKE_BUILD_TYPE}" STREQUAL "WIP")
 	#{
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "-std=c++1y -O0 -Wall -Wextra -Wpedantic -Wundef -Wshadow -pthread -Wno-missing-field-initializers")		
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "-std=c++1y -O0 -Wall -Wextra -Wpedantic -Wundef -Wshadow -pthread -Wno-missing-field-initializers")
 	#}
 	else()
 	#{
@@ -94,7 +94,7 @@ endmacro()
 
 macro(SSVCMake_setDefaultGlobs)
 #{
-	message("SSVCMake: setting default globs")	
+	message("SSVCMake: setting default globs")
 	file(GLOB_RECURSE SRC_LIST "${INC_DIR}/*" "${SRC_DIR}/*")
 #}
 endmacro(SSVCMake_setDefaultGlobs)
@@ -107,7 +107,7 @@ macro(SSVCMake_findExtlib mExtlib)
 
 	set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/../${mExtlib}/cmake/modules/;${CMAKE_SOURCE_DIR}/extlibs/${mExtlib}/cmake/modules/;${CMAKE_MODULE_PATH}")
 	find_package("${mExtlib}" REQUIRED)
-	string(TOUPPER "${mExtlib}" ${mExtlib}_UPPER)	
+	string(TOUPPER "${mExtlib}" ${mExtlib}_UPPER)
 	include_directories("${${${mExtlib}_UPPER}_INCLUDE_DIR}")
 #}
 endmacro()
@@ -120,7 +120,7 @@ macro(SSVCMake_setDefaults)
 	#{
 		message("SSVCMake: cleaning cache")
 
-		SSVCMake_cleanCache()		
+		SSVCMake_cleanCache()
 	#}
 	else()
 	#{
