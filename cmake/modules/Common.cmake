@@ -71,6 +71,18 @@ macro(SSVCMake_setDefaultFlags)
 	#{
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "-std=c++1y -O0 -Wall -Wextra -Wpedantic -Wundef -Wshadow -pthread -Wno-missing-field-initializers")
 	#}
+	elseif("${CMAKE_BUILD_TYPE}" STREQUAL "WIP_NA")
+	#{
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "-std=c++1y -O0 -Wall -Wextra -Wpedantic -Wundef -Wshadow -pthread -Wno-missing-field-initializers -DSSVU_ASSERT_FORCE_OFF=1")
+	#}
+	elseif("${CMAKE_BUILD_TYPE}" STREQUAL "WIP_OPT")
+	#{
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "-std=c++1y -O -Wall -Wextra -Wpedantic -Wundef -Wshadow -pthread -Wno-missing-field-initializers")
+	#}
+	elseif("${CMAKE_BUILD_TYPE}" STREQUAL "WIP_OPT_NA")
+	#{
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "-std=c++1y -O -Wall -Wextra -Wpedantic -Wundef -Wshadow -pthread -Wno-missing-field-initializers -DNDEBUG")
+	#}
 	else()
 	#{
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "-std=c++1y -Wall -Wextra -Wpedantic -pthread -Wundef -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -Wno-unreachable-code -Wno-missing-field-initializers")
