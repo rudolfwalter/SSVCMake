@@ -67,25 +67,27 @@ macro(SSVCMake_setDefaultFlags)
 #{
 	message("SSVCMake: setting default flags")
 
+	set(SSVCMAKE_COMMON_FLAGS "-std=c++1y -pthread -Wall -Wextra -Wpedantic -Wundef -Wshadow -Wno-missing-field-initializers -Wpointer-arith -Wcast-align -Wwrite-strings -Wno-unreachable-code")
+
 	if("${CMAKE_BUILD_TYPE}" STREQUAL "WIP")
 	#{
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "-std=c++1y -O0 -Wall -Wextra -Wpedantic -Wundef -Wshadow -pthread -Wno-missing-field-initializers")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -O0")
 	#}
 	elseif("${CMAKE_BUILD_TYPE}" STREQUAL "WIP_NA")
 	#{
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "-std=c++1y -O0 -Wall -Wextra -Wpedantic -Wundef -Wshadow -pthread -Wno-missing-field-initializers -DSSVU_ASSERT_FORCE_OFF=1")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -O0 -DSSVU_ASSERT_FORCE_OFF=1")		
 	#}
 	elseif("${CMAKE_BUILD_TYPE}" STREQUAL "WIP_OPT")
 	#{
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "-std=c++1y -O -Wall -Wextra -Wpedantic -Wundef -Wshadow -pthread -Wno-missing-field-initializers")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -O")
 	#}
 	elseif("${CMAKE_BUILD_TYPE}" STREQUAL "WIP_OPT_NA")
 	#{
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "-std=c++1y -O -Wall -Wextra -Wpedantic -Wundef -Wshadow -pthread -Wno-missing-field-initializers -DNDEBUG")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -O -DSSVU_ASSERT_FORCE_OFF=1")		
 	#}
 	else()
 	#{
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "-std=c++1y -Wall -Wextra -Wpedantic -pthread -Wundef -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -Wno-unreachable-code -Wno-missing-field-initializers")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS}")
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3")
 		SSVCMake_setForceCache(SSVCMAKE_CXX_FLAGS_DEBUG "-fno-omit-frame-pointer -g3")
 	#}
