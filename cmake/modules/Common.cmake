@@ -71,7 +71,7 @@ macro(SSVCMake_setDefaultFlags)
 
 	if("${CMAKE_BUILD_TYPE}" STREQUAL "WIP")
 	#{
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -O0 -D_GLIBCXX_DEBUG_PEDANTIC")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -O0 -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC")
 	#}
 	elseif("${CMAKE_BUILD_TYPE}" STREQUAL "WIP_NA")
 	#{
@@ -89,7 +89,7 @@ macro(SSVCMake_setDefaultFlags)
 	#{
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS}")
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3")
-		SSVCMake_setForceCache(SSVCMAKE_CXX_FLAGS_DEBUG "-fno-omit-frame-pointer -g3")
+		SSVCMake_setForceCache(SSVCMAKE_CXX_FLAGS_DEBUG "-fno-omit-frame-pointer -g3 -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC")
 	#}
 	endif()
 
