@@ -178,7 +178,12 @@ endmacro()
 macro(SSVCMake_linkSFML)
 #{
 	message("SSVCMake: linking SFML")
-	target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES})
+
+	target_link_libraries(${PROJECT_NAME} ${SFML_AUDIO_LIBRARY_RELEASE})
+	target_link_libraries(${PROJECT_NAME} ${SFML_GRAPHICS_LIBRARY_RELEASE})
+	target_link_libraries(${PROJECT_NAME} ${SFML_WINDOW_LIBRARY_RELEASE})
+	target_link_libraries(${PROJECT_NAME} ${SFML_SYSTEM_LIBRARY_RELEASE})
+	target_link_libraries(${PROJECT_NAME} ${SFML_NETWORK_LIBRARY_RELEASE})
 #}
 endmacro()
 
