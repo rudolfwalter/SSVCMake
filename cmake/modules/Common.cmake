@@ -155,7 +155,7 @@ macro(SSVCMake_findSFML)
 	message("SSVCMake: finding SFML")
 
 	set(SFML_STATIC_LIBRARIES FALSE CACHE BOOL "Look for static SFML libraries.")
-	find_package(SFML COMPONENTS audio graphics window system network)
+	find_package(SFML 2 REQUIRED system window graphics network audio)
 
 	if(NOT SFML_FOUND)
 	#{
@@ -178,12 +178,7 @@ endmacro()
 macro(SSVCMake_linkSFML)
 #{
 	message("SSVCMake: linking SFML")
-
-	target_link_libraries(${PROJECT_NAME} ${SFML_AUDIO_LIBRARY})
-	target_link_libraries(${PROJECT_NAME} ${SFML_GRAPHICS_LIBRARY})
-	target_link_libraries(${PROJECT_NAME} ${SFML_WINDOW_LIBRARY})
-	target_link_libraries(${PROJECT_NAME} ${SFML_SYSTEM_LIBRARY})
-	target_link_libraries(${PROJECT_NAME} ${SFML_NETWORK_LIBRARY})
+	target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES})
 #}
 endmacro()
 
@@ -199,3 +194,6 @@ macro(SSVCMake_setAndInstallHeaderOnly)
 	install(DIRECTORY ${INC_DIR} DESTINATION .)
 #}
 endmacro()
+
+
+# TODO: clang debug mode
