@@ -70,28 +70,35 @@ macro(SSVCMake_setDefaultFlags)
 
 	if("${CMAKE_BUILD_TYPE}" STREQUAL "WIP")
 	#{
+		message("SSVCMake: WIP (no optimization)")
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -O0")
-	#}
-	elseif("${CMAKE_BUILD_TYPE}" STREQUAL "WIP_NA")
-	#{
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -O0 -DSSVU_ASSERT_FORCE_OFF=1")		
-	#}
-	elseif("${CMAKE_BUILD_TYPE}" STREQUAL "WIP_OPT")
-	#{
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -O")
-	#}
-	elseif("${CMAKE_BUILD_TYPE}" STREQUAL "WIP_OPT_NA")
-	#{
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -O -DSSVU_ASSERT_FORCE_OFF=1")		
-	#}
+	#}	
 	else()
 	#{
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS}")
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3")
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS_DEBUG "-fno-omit-frame-pointer -g3 -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS_DEBUG "-fno-omit-frame-pointer -g3")
 	#}
 	endif()
 
+	if("${SSVCMAKE_NA}")
+	#{
+		message("SSVCMake: no ssvu asserts")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSSVU_ASSERT_FORCE_OFF=1")		
+	#}
+
+	if("${SSVCMAKE_LIBDEBUG}")
+	#{
+		message("SSVCMake: glibcxx debug pedantic")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC")
+	#}
+
+	if("${SSVCMAKE_OPT}")
+	#{
+		message("SSVCMake: -O opt")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O")
+	#}
+	
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SSVCMAKE_EXTRA_FLAGS}")
 
 	if("${SSVCMAKE_PROFILE_COMPILATION}")
