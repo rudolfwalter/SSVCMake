@@ -101,6 +101,20 @@ macro(SSVCMake_setDefaultFlags)
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O")
 	#}
 	endif()
+
+	if("${SSVCMAKE_ASAN}")
+	#{
+		message("SSVCMake: asan")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fno-omit-frame-pointer -g")
+	#}
+	endif()
+
+	if("${SSVCMAKE_MSAN}")
+	#{
+		message("SSVCMake: msan")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=memory -fno-omit-frame-pointer -g")
+	#}
+	endif()
 	
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SSVCMAKE_EXTRA_FLAGS}")
 
