@@ -115,6 +115,13 @@ macro(SSVCMake_setDefaultFlags)
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=memory -fno-omit-frame-pointer -g")
 	#}
 	endif()
+
+	if("${SSVCMAKE_USAN}")
+	#{
+		message("SSVCMake: undefined san")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined,integer -fno-omit-frame-pointer -g")
+	#}
+	endif()
 	
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SSVCMAKE_EXTRA_FLAGS}")
 
