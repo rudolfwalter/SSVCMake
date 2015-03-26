@@ -86,18 +86,21 @@ macro(SSVCMake_setDefaultFlags)
 		message("SSVCMake: no ssvu asserts")
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSSVU_ASSERT_FORCE_OFF=1")		
 	#}
+	endif()
 
 	if("${SSVCMAKE_LIBDEBUG}")
 	#{
 		message("SSVCMake: glibcxx debug pedantic")
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC")
 	#}
+	endif()
 
 	if("${SSVCMAKE_OPT}")
 	#{
 		message("SSVCMake: -O opt")
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O")
 	#}
+	endif()
 	
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SSVCMAKE_EXTRA_FLAGS}")
 
