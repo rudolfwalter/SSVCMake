@@ -76,7 +76,7 @@ macro(SSVCMake_setDefaultFlags)
 	else()
 	#{
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS}")
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3 -ffast-math")
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS_DEBUG "-fno-omit-frame-pointer -g3")
 	#}
 	endif()
@@ -120,6 +120,13 @@ macro(SSVCMake_setDefaultFlags)
 	#{
 		message("SSVCMake: undefined san")
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined,integer -fno-omit-frame-pointer -g")
+	#}
+	endif()
+
+	if("${SSVCMAKE_NOTESTS}")
+	#{
+		message("SSVCMake: disable tests")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSSVUT_DISABLE")
 	#}
 	endif()
 	
