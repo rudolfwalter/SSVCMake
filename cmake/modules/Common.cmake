@@ -229,6 +229,3 @@ macro(SSVCMake_setAndInstallHeaderOnly)
 	install(DIRECTORY ${INC_DIR} DESTINATION .)
 #}
 endmacro()
-
-
-# TODO: clang debug mode
