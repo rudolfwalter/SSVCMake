@@ -192,7 +192,7 @@ macro(SSVCMake_findSFML)
 	message("SSVCMake: finding SFML")
 
 	set(SFML_STATIC_LIBRARIES FALSE CACHE BOOL "Look for static SFML libraries.")
-	find_package(SFML 2 REQUIRED system window graphics network audio)
+	find_package(SFML REQUIRED system window graphics network audio)
 
 	if(NOT SFML_FOUND)
 	#{
