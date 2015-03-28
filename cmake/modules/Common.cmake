@@ -86,10 +86,10 @@ macro(SSVCMake_setDefaultFlags)
 	#}
 	endif()
 
-	if("${SSVCMAKE_NA}")
+	if("${SSVCMAKE_ND}")
 	#{
-		message("SSVCMake: no ssvu asserts")
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSSVU_ASSERT_FORCE_OFF=1")		
+		message("SSVCMake: no ssvu asserts, ndebug")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSSVU_ASSERT_FORCE_OFF=1 -DNDEBUG")		
 	#}
 	endif()
 
