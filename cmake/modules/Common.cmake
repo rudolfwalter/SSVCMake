@@ -89,7 +89,7 @@ macro(SSVCMake_setDefaultFlags)
 	if("${SSVCMAKE_LIBCPP}")
 	#{
 		message("SSVCMake: use libc++")
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")				
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -lstdc++")				
 	#}
 	endif()
 
