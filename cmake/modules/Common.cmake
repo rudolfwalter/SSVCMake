@@ -73,6 +73,11 @@ macro(SSVCMake_setDefaultFlags)
 		message("SSVCMake: WIP (no optimization)")
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -O0")
 	#}	
+	elseif("${CMAKE_BUILD_TYPE}" STREQUAL "WIP_OPT")
+	#{
+		message("SSVCMake: WIP (-O optimization)")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -O")
+	#}	
 	else()
 	#{
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS}")
@@ -92,13 +97,6 @@ macro(SSVCMake_setDefaultFlags)
 	#{
 		message("SSVCMake: glibcxx debug pedantic")
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC")
-	#}
-	endif()
-
-	if("${SSVCMAKE_OPT}")
-	#{
-		message("SSVCMake: -O opt")
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O")
 	#}
 	endif()
 
