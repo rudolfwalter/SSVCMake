@@ -86,6 +86,13 @@ macro(SSVCMake_setDefaultFlags)
 	#}
 	endif()
 
+	if("${SSVCMAKE_LIBCPP}")
+	#{
+		message("SSVCMake: use libc++")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")				
+	#}
+	endif()
+
 	if("${SSVCMAKE_ND}")
 	#{
 		message("SSVCMake: no ssvu asserts, ndebug")
