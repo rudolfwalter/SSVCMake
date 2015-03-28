@@ -76,7 +76,7 @@ macro(SSVCMake_setDefaultFlags)
 	elseif("${CMAKE_BUILD_TYPE}" STREQUAL "WIP_OPT")
 	#{
 		message("SSVCMake: WIP (-O optimization)")
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -O")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -O -DSSVU_ASSERT_FORCE_OFF=1 -DNDEBUG")
 	#}	
 	else()
 	#{
