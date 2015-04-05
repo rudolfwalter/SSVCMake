@@ -17,6 +17,7 @@ macro(SSVCMake_cleanCache)
 	foreach(file ${cmake_generated})
 
 	  if (EXISTS ${file})
+	  		message("SSVCMake: deleting ${file}")
 	     file(REMOVE_RECURSE ${file})
 	  endif()
 
