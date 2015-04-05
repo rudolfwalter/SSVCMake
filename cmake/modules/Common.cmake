@@ -81,7 +81,7 @@ macro(SSVCMake_setDefaultFlags)
 	else()
 	#{
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS}")
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3 -ffast-math")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -Ofast -ffast-math")
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS_DEBUG "-fno-omit-frame-pointer -g3")
 	#}
 	endif()
