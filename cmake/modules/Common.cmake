@@ -1,12 +1,5 @@
 macro(SSVCMake_cleanCache)
 #{
-	set(CMAKE_BUILD_TYPE "" CACHE STRING "" FORCE)
-	set(CMAKE_CXX_FLAGS "" CACHE STRING "" FORCE)
-	set(CMAKE_CXX_FLAGS_RELEASE "" CACHE STRING "" FORCE)
-	set(CMAKE_CXX_FLAGS_DEBUG "" CACHE STRING "" FORCE)	
-	unset(SSVCMAKE_CLEAN_CACHE CACHE)
-	unset(SSVCMAKE_CLEAN_CACHE)
-
 	set(cmake_generated 
 		${CMAKE_BINARY_DIR}/CMakeCache.txt
         ${CMAKE_BINARY_DIR}/cmake_install.cmake  
@@ -24,6 +17,13 @@ macro(SSVCMake_cleanCache)
 	  	endif()
 	#}
 	endforeach(file)
+
+	set(CMAKE_BUILD_TYPE "" CACHE STRING "" FORCE)
+	set(CMAKE_CXX_FLAGS "" CACHE STRING "" FORCE)
+	set(CMAKE_CXX_FLAGS_RELEASE "" CACHE STRING "" FORCE)
+	set(CMAKE_CXX_FLAGS_DEBUG "" CACHE STRING "" FORCE)	
+	unset(SSVCMAKE_CLEAN CACHE)
+	unset(SSVCMAKE_CLEAN)
 #}
 endmacro()
 
