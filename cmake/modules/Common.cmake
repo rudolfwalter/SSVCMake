@@ -7,22 +7,23 @@ macro(SSVCMake_cleanCache)
 	unset(SSVCMAKE_CLEAN_CACHE CACHE)
 	unset(SSVCMAKE_CLEAN_CACHE)
 
-
-	set(cmake_generated ${CMAKE_BINARY_DIR}/CMakeCache.txt
-                    ${CMAKE_BINARY_DIR}/cmake_install.cmake  
-                    ${CMAKE_BINARY_DIR}/Makefile
-                    ${CMAKE_BINARY_DIR}/CMakeFiles
+	set(cmake_generated 
+		${CMAKE_BINARY_DIR}/CMakeCache.txt
+        ${CMAKE_BINARY_DIR}/cmake_install.cmake  
+        ${CMAKE_BINARY_DIR}/Makefile
+        ${CMAKE_BINARY_DIR}/CMakeFiles
 	)
 
 	foreach(file ${cmake_generated})
-
-	  if (EXISTS ${file})
+	#{
+	  	if(EXISTS ${file})
+		#{
 	  		message("SSVCMake: deleting ${file}")
-	     file(REMOVE_RECURSE ${file})
-	  endif()
-
+	     	file(REMOVE_RECURSE ${file})
+	    #}
+	  	endif()
+	#}
 	endforeach(file)
-
 #}
 endmacro()
 
@@ -190,7 +191,7 @@ endmacro()
 
 macro(SSVCMake_setDefaults)
 #{
-	if("${SSVCMAKE_CLEAN_CACHE}")
+	if("${SSVCMAKE_CLEAN}")
 	#{
 		message("SSVCMake: cleaning cache")
 
