@@ -172,7 +172,7 @@ macro(SSVCMake_setDefaultGlobs)
 	message("SSVCMake: setting default globs")
 	file(GLOB_RECURSE SRC_LIST "${INC_DIR}/*" "${SRC_DIR}/*")
 #}
-endmacro(SSVCMake_setDefaultGlobs)
+endmacro()
 
 
 
