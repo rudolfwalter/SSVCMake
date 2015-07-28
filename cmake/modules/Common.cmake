@@ -1,8 +1,8 @@
 macro(SSVCMake_cleanCache)
 #{
-	set(cmake_generated 
+	set(cmake_generated
 		${CMAKE_BINARY_DIR}/CMakeCache.txt
-        ${CMAKE_BINARY_DIR}/cmake_install.cmake  
+        ${CMAKE_BINARY_DIR}/cmake_install.cmake
         ${CMAKE_BINARY_DIR}/Makefile
         ${CMAKE_BINARY_DIR}/CMakeFiles
 	)
@@ -21,7 +21,7 @@ macro(SSVCMake_cleanCache)
 	set(CMAKE_BUILD_TYPE "" CACHE STRING "" FORCE)
 	set(CMAKE_CXX_FLAGS "" CACHE STRING "" FORCE)
 	set(CMAKE_CXX_FLAGS_RELEASE "" CACHE STRING "" FORCE)
-	set(CMAKE_CXX_FLAGS_DEBUG "" CACHE STRING "" FORCE)	
+	set(CMAKE_CXX_FLAGS_DEBUG "" CACHE STRING "" FORCE)
 	unset(SSVCMAKE_CLEAN CACHE)
 	unset(SSVCMAKE_CLEAN)
 #}
@@ -88,14 +88,24 @@ macro(SSVCMake_setDefaultFlags)
 
 	if("${CMAKE_BUILD_TYPE}" STREQUAL "WIP")
 	#{
-		message("SSVCMake: WIP (no optimization)")
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -O0")
-	#}	
+		message("SSVCMake: WIP (no optimization, no tests)")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -O0 -DSSVUT_DISABLE")
+	#}
 	elseif("${CMAKE_BUILD_TYPE}" STREQUAL "WIP_OPT")
 	#{
-		message("SSVCMake: WIP (-O optimization)")
+		message("SSVCMake: WIP (-O optimization, no tests)")
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -O -DSSVU_ASSERT_FORCE_OFF=1 -DNDEBUG")
-	#}	
+	#}
+	elseif("${CMAKE_BUILD_TYPE}" STREQUAL "WIP_TESTS")
+	#{
+		message("SSVCMake: WIP (-O optimization, tests enabled)")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -O0")
+	#}
+	elseif("${CMAKE_BUILD_TYPE}" STREQUAL "FINAL_RELEASE")
+	#{
+		message("SSVCMake: final release (release, no tests)")
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -DNDEBUG -Ofast -ffast-math -DSSVUT_DISABLE")
+	#}
 	else()
 	#{
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS}")
@@ -107,15 +117,15 @@ macro(SSVCMake_setDefaultFlags)
 	if("${SSVCMAKE_LIBCPP}")
 	#{
 		message("SSVCMake: use libc++")
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")		
-		SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lc++abi")		
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+		SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lc++abi")
 	#}
 	endif()
 
 	if("${SSVCMAKE_ND}")
 	#{
 		message("SSVCMake: no ssvu asserts, ndebug")
-		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSSVU_ASSERT_FORCE_OFF=1 -DNDEBUG")		
+		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSSVU_ASSERT_FORCE_OFF=1 -DNDEBUG")
 	#}
 	endif()
 
@@ -142,7 +152,7 @@ macro(SSVCMake_setDefaultFlags)
 
 	if("${SSVCMAKE_USAN}")
 	#{
-		message("SSVCMake: undefined san")
+		message("SSVCMake: usan")
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined,integer -fno-omit-frame-pointer -g")
 	#}
 	endif()
@@ -153,7 +163,7 @@ macro(SSVCMake_setDefaultFlags)
 		SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSSVUT_DISABLE")
 	#}
 	endif()
-	
+
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SSVCMAKE_EXTRA_FLAGS}")
 
 	if("${SSVCMAKE_PROFILE_COMPILATION}")
