@@ -21,14 +21,11 @@ macro(vrm_cmake_init_project_source_dir)
 endmacro()
 
 # Initializes common data for a C++ CMake project.
-# * Minimum required CMake version.
 # * Project name and uppercase project name.
 # * Appends common module paths.
 # * Enables testing.
 macro(vrm_cmake_init_project project_name)
 #{
-    cmake_minimum_required(VERSION 3.0)
-
     project(${project_name} CXX)
     enable_testing()
 
