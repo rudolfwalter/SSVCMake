@@ -4,6 +4,13 @@
 # Distributed under the Boost Software License, Version 1.0.
 # (See accompanying file LICENSE.md or copy at http://boost.org/LICENSE_1_0.txt)
 
+# Message with vrm_cmake prefix.
+macro(vrm_cmake_message str)
+#{
+    message("[vrm_cmake] ${str}")
+#}
+endmacro()
+
 # Initializes the `PROJECT_NAME_UPPER` variable.
 # It contains the project name, uppercase.
 macro(vrm_cmake_init_project_name_upper)
@@ -35,6 +42,8 @@ macro(vrm_cmake_init_project project_name)
     list(APPEND CMAKE_MODULE_PATH
         "${CMAKE_CURRENT_SOURCE_DIR}/cmake"
         "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
+
+    vrm_cmake_message("initialized project ${project_name}")
 #}
 endmacro()
 
@@ -92,6 +101,8 @@ endmacro()
 # The `src_dir` is copied to `dest_dir`.
 macro(vrm_cmake_header_only_install file_list src_dir dest_dir)
 #{
+    vrm_cmake_message("added header-only install target")
+
     set_source_files_properties(${file_list} PROPERTIES HEADER_FILE_ONLY 1)
     add_library(HEADER_ONLY_TARGET STATIC ${file_list})
     set_target_properties(HEADER_ONLY_TARGET PROPERTIES LINKER_LANGUAGE CXX)
@@ -103,6 +114,8 @@ endmacro()
 # Automatically globs `src_dir`.
 macro(vrm_cmake_header_only_install_glob src_dir dest_dir)
 #{
+    vrm_cmake_message("globbing ${src_dir} for header-only install")
+
     # Glob library header files.
     file(GLOB_RECURSE INSTALL_FILES_LIST "${src_dir}/*")
 
@@ -115,6 +128,8 @@ endmacro()
 # Uses CTest.
 macro(vrm_check_target)
 #{
+    vrm_cmake_message("created check target")
+
     add_custom_target(check
         COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
@@ -144,8 +159,10 @@ macro(vrm_cmake_add_option_memcheck)
 #{
     vrm_cmake_project_option(ENABLE_MEMCHECK "Run the unit tests and examples under Valgrind if it is found." OFF)
 
-    if("${PROJECT_NAME_UPPER}_ENABLE_MEMCHECK")
+    if("${${PROJECT_NAME_UPPER}_ENABLE_MEMCHECK}")
     #{
+        vrm_cmake_message("memcheck enabled")
+
         find_package(Valgrind REQUIRED)
     #}
     endif()
@@ -157,8 +174,10 @@ macro(vrm_cmake_add_option_no_exceptions)
 #{
     vrm_cmake_project_option(DISABLE_EXCEPTIONS "Build with exceptions disabled." OFF)
 
-    if("${PROJECT_NAME_UPPER}_DISABLE_EXCEPTIONS")
+    if("${${PROJECT_NAME_UPPER}_DISABLE_EXCEPTIONS}")
     #{
+        vrm_cmake_message("exceptions disabled")
+
         vrm_cmake_add_compiler_flag(HAS_FNO_EXCEPTIONS -fno-exceptions)
     #}
     endif()
@@ -170,8 +189,10 @@ macro(vrm_cmake_add_option_werror)
 #{
     vrm_cmake_project_option(ENABLE_WERROR "Fail and stop if a warning is triggered." OFF)
 
-    if("${PROJECT_NAME_UPPER}_ENABLE_WERROR")
+    if("${${PROJECT_NAME_UPPER}_ENABLE_WERROR}")
     #{
+        vrm_cmake_message("werror enabled")
+
         vrm_cmake_add_compiler_flag(HAS_WERROR -Werror)
         vrm_cmake_add_compiler_flag(HAS_WX -WX)
     #}
@@ -183,7 +204,7 @@ endmacro()
 # Uses Valgrind if memcheck is enabled.
 function(vrm_cmake_add_test name)
 #{
-    if("${PROJECT_NAME_UPPER}_ENABLE_MEMCHECK")
+    if("${${PROJECT_NAME_UPPER}_ENABLE_MEMCHECK}")
     #{
         add_test(${name} ${Valgrind_EXECUTABLE} --leak-check=full --error-exitcode=1 ${ARGN})
     #}
@@ -231,6 +252,8 @@ endfunction()
 # Generate tests that include each public header.
 macro(vrm_cmake_generate_public_header_tests header_list inc_dir)
 #{
+    vrm_cmake_message("generatic public header tests")
+
     foreach(_header IN LISTS ${header_list})
     #{
         file(RELATIVE_PATH _relative "${inc_dir}" "${_header}")
@@ -243,6 +266,8 @@ endmacro()
 # Generate unit tests.
 macro(vrm_cmake_generate_unit_tests test_srcs)
 #{
+    vrm_cmake_message("generating unit tests")
+
     foreach(_file IN LISTS ${test_srcs})
     #{
         file(READ "${_file}" _contents)
@@ -258,6 +283,8 @@ endmacro()
 # Generate unit tests.
 macro(vrm_cmake_generate_unit_tests_glob glob_pattern)
 #{
+    vrm_cmake_message("globbing unit tests")
+
     # Glob all tests.
     file(GLOB_RECURSE _srcs ${glob_pattern})
 
@@ -269,6 +296,8 @@ endmacro()
 # Generate unit tests.
 macro(vrm_cmake_generate_public_header_tests_glob glob_pattern inc_dir)
 #{
+    vrm_cmake_message("globbing public headers")
+
     # Glob all public headers. (Detail headers can be removed here.)
     file(GLOB_RECURSE _pub_headers "${inc_dir}/${glob_pattern}")
     vrm_cmake_list_remove_glob(_pub_headers GLOB_RECURSE "dummy")
@@ -281,6 +310,8 @@ endmacro()
 # Adds common compiler safety/warning flags/definitions to the project.
 macro(vrm_cmake_add_common_compiler_flags_safety)
 #{
+    vrm_cmake_message("added common safety flags")
+
     vrm_cmake_add_compiler_flag(HAS_PEDANTIC                          -pedantic)
     vrm_cmake_add_compiler_flag(HAS_STDCXX1Y                          -std=c++1y)
     vrm_cmake_add_compiler_flag(HAS_W                                 -W)
@@ -302,6 +333,8 @@ endmacro()
 # Adds common compiler release flags/definitions to the project.
 macro(vrm_cmake_add_common_compiler_flags_release)
 #{
+    vrm_cmake_message("added common release flags")
+
     vrm_cmake_add_compiler_flag(HAS_OFAST                             -Ofast)
     vrm_cmake_add_compiler_flag(HAS_FFAST_MATH                        -ffast-math)
 
@@ -312,6 +345,8 @@ endmacro()
 # Adds common compiler debug flags/definitions to the project.
 macro(vrm_cmake_add_common_compiler_flags_debug)
 #{
+    vrm_cmake_message("added common debug flags")
+
     vrm_cmake_add_compiler_flag(HAS_F_NO_OMIT_FRAME_POINTER           -fno-omit-frame-pointer)
     vrm_cmake_add_compiler_flag(HAS_G3                                -g3)
 #}
@@ -324,17 +359,17 @@ macro(vrm_cmake_add_common_compiler_flags)
 
     if("${CMAKE_BUILD_TYPE}" STREQUAL "RELEASE")
     #{
-        message("vrm_cmake: release mode")
+        vrm_cmake_message("RELEASE mode")
         vrm_cmake_add_common_compiler_flags_release()
     #}
-    elseif("${CMAKE_BUILD_TYPE}" STREQUAL "WIP_OPT")
+    elseif("${CMAKE_BUILD_TYPE}" STREQUAL "DEBUG")
     #{
-        message("vrm_cmake: debug mode")
+        vrm_cmake_message("DEBUG mode")
         vrm_cmake_add_common_compiler_flags_debug()
     #}
     else()
     #{
-        message("vrm_cmake: wip mode")
+        vrm_cmake_message("WIP mode")
     #}
     endif()
 #}
