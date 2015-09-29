@@ -132,7 +132,7 @@ function(vrm_cmake_target_name_for out file)
         set(_extension "${ARGV2}")
     endif()
 
-    file(RELATIVE_PATH _relative "${PROJECT_NAME_UPPER}_SOURCE_DIR" ${file})
+    file(RELATIVE_PATH _relative "${${PROJECT_NAME_UPPER}_SOURCE_DIR}" ${file})
     string(REPLACE "${_extension}" "" _name ${_relative})
     string(REGEX REPLACE "/" "." _name ${_name})
     set(${out} "${_name}" PARENT_SCOPE)
