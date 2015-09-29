@@ -243,7 +243,7 @@ endmacro()
 # Generate unit tests.
 macro(vrm_cmake_generate_unit_tests test_srcs)
 #{
-    foreach(_file IN LISTS test_srcs)
+    foreach(_file IN LISTS ${test_srcs})
     #{
         file(READ "${_file}" _contents)
         vrm_cmake_target_name_for(_target "${_file}")
@@ -259,7 +259,7 @@ endmacro()
 macro(vrm_cmake_generate_unit_tests_glob glob_pattern)
 #{
     # Glob all tests.
-    file(GLOB_RECURSE _srcs glob_pattern)
+    file(GLOB_RECURSE _srcs ${glob_pattern})
 
     # Add all the unit tests.
     vrm_cmake_generate_unit_tests(_srcs)
