@@ -28,6 +28,7 @@ endmacro()
 macro(vrm_cmake_init_project project_name)
 #{
     cmake_minimum_required(VERSION 3.0)
+    
     project(${project_name} CXX)
     enable_testing()
 
@@ -51,14 +52,14 @@ endmacro()
 # Includes a CMake module only once.
 macro(vrm_cmake_include_once module flag)
 #{
-    if(flag)
+    if(${flag})
     #{
 
     #}
     else()
     #{
         include(${module})
-        set(flag true)
+        set(${flag} true)
     #}
     endif()
 #}
