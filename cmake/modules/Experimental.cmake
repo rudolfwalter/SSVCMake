@@ -276,7 +276,7 @@ macro(vrm_cmake_generate_public_header_tests_glob glob_pattern inc_dir)
 endmacro()
 
 # Adds common compiler safety/warning flags/definitions to the project.
-macro(vrm_add_common_compiler_flags_safety)
+macro(vrm_cmake_add_common_compiler_flags_safety)
 #{
     vrm_cmake_add_compiler_flag(HAS_PEDANTIC                          -pedantic)
     vrm_cmake_add_compiler_flag(HAS_STDCXX1Y                          -std=c++1y)
@@ -297,7 +297,7 @@ macro(vrm_add_common_compiler_flags_safety)
 endmacro()
 
 # Adds common compiler release flags/definitions to the project.
-macro(vrm_add_common_compiler_flags_release)
+macro(vrm_cmake_add_common_compiler_flags_release)
 #{
     vrm_cmake_add_compiler_flag(HAS_OFAST                             -Ofast)
     vrm_cmake_add_compiler_flag(HAS_FFAST_MATH                        -ffast-math)
@@ -307,7 +307,7 @@ macro(vrm_add_common_compiler_flags_release)
 endmacro()
 
 # Adds common compiler debug flags/definitions to the project.
-macro(vrm_add_common_compiler_flags_debug)
+macro(vrm_cmake_add_common_compiler_flags_debug)
 #{
     vrm_cmake_add_compiler_flag(HAS_F_NO_OMIT_FRAME_POINTER           -fno-omit-frame-pointer)
     vrm_cmake_add_compiler_flag(HAS_G3                                -g3)
@@ -315,19 +315,19 @@ macro(vrm_add_common_compiler_flags_debug)
 endmacro()
 
 # Adds common compiler flags/definitions, depending on the build type.
-macro(vrm_add_common_compiler_flags)
+macro(vrm_cmake_add_common_compiler_flags)
 #{
-    vrm_add_common_compiler_flags_safety()
+    vrm_cmake_add_common_compiler_flags_safety()
 
     if("${CMAKE_BUILD_TYPE}" STREQUAL "RELEASE")
     #{
         message("vrm_cmake: release mode")
-        vrm_add_common_compiler_flags_release()
+        vrm_cmake_add_common_compiler_flags_release()
     #}
     elseif("${CMAKE_BUILD_TYPE}" STREQUAL "WIP_OPT")
     #{
         message("vrm_cmake: debug mode")
-        vrm_add_common_compiler_flags_debug()
+        vrm_cmake_add_common_compiler_flags_debug()
     #}
     else()
     #{
