@@ -381,3 +381,28 @@ macro(vrm_cmake_list_remove_glob list glob)
     list(REMOVE_ITEM ${list} ${ARGN})
 #}
 endmacro()
+
+# TODO:
+macro(vrm_cmake_find_extlib_in extlib dir)
+#{
+    vrm_cmake_message("finding ${extlib}")
+
+    list(APPEND CMAKE_MODULE_PATH 
+        "${CMAKE_SOURCE_DIR}/${dir}/${extlib}/cmake/modules/"
+        "${CMAKE_SOURCE_DIR}/${dir}/${extlib}/cmake/"
+        "${CMAKE_SOURCE_DIR}/extlibs/${extlib}/cmake/modules/"
+        "${CMAKE_SOURCE_DIR}/extlibs/${extlib}/cmake/")
+    
+    find_package("${extlib}" REQUIRED)
+    string(TOUPPER "${extlib}" ${extlib}_UPPER)
+    include_directories("${${${extlib}_UPPER}_INCLUDE_DIR}")
+#}
+endmacro()
+
+# TODO:
+macro(vrm_cmake_find_extlib extlib)
+#{
+    vrm_cmake_message("finding ${extlib} in ./..")
+    vrm_cmake_find_extlib_in(${extlib} "..")
+#}
+endmacro()
