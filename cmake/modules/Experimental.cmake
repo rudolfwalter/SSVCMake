@@ -231,10 +231,10 @@ endfunction()
 # Generate tests that include each public header.
 macro(vrm_cmake_generate_public_header_tests header_list inc_dir)
 #{
-    foreach(_header IN LISTS header_list)
+    foreach(_header IN LISTS ${header_list})
     #{
         file(RELATIVE_PATH _relative "${inc_dir}" "${_header}")
-        vrm_cmake_add_header_test("${_relative}")
+        vrm_cmake_add_public_header_test("${_relative}")
     #}
     endforeach()
 #}
