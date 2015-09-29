@@ -104,7 +104,7 @@ macro(SSVCMake_setDefaultFlags)
     elseif("${CMAKE_BUILD_TYPE}" STREQUAL "FINAL_RELEASE")
     #{
         message("SSVCMake: final release (release, no tests)")
-        SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -DNDEBUG -Ofast -ffast-math -DSSVUT_DISABLE")
+        SSVCMake_setForceCache(CMAKE_CXX_FLAGS "${SSVCMAKE_COMMON_FLAGS} -DNDEBUG -Ofast -ffast-math -DSSVUT_DISABLE -DSSVU_ASSERT_FORCE_OFF=1")
     #}
     else()
     #{
