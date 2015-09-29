@@ -57,7 +57,7 @@ macro(vrm_cmake_include_once module flag)
     #}
     else()
     #{
-        include(module)
+        include(${module})
         set(flag true)
     #}
     endif()
