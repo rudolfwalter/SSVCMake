@@ -8,7 +8,8 @@
 # It contains the project name, uppercase.
 macro(vrm_cmake_init_project_name_upper)
 #{
-    string(TOUPPER ${project_name} PROJECT_NAME_UPPER)
+    set(PROJECT_NAME_UPPER "")
+    string(TOUPPER ${PROJECT_NAME} PROJECT_NAME_UPPER)
 #}
 endmacro()
 
