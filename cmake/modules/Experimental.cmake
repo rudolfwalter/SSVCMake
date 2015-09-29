@@ -95,10 +95,6 @@ endmacro()
 # The `src_dir` is copied to `dest_dir`.
 macro(vrm_cmake_header_only_install file_list src_dir dest_dir)
 #{
-    message("file list: ${file_list}")
-    message("src_dir: ${src_dir}")
-    message("dest_dir: ${dest_dir}")
-
     set_source_files_properties(${file_list} PROPERTIES HEADER_FILE_ONLY 1)
     add_library(HEADER_ONLY_TARGET STATIC ${file_list})
     set_target_properties(HEADER_ONLY_TARGET PROPERTIES LINKER_LANGUAGE CXX)
@@ -111,11 +107,7 @@ endmacro()
 macro(vrm_cmake_header_only_install_glob src_dir dest_dir)
 #{
     # Glob library header files.
-    file(GLOB_RECURSE INSTALL_FILES_LIST "${src_dir}")
-
-    message("INSTALL_FILES_LIST list: ${INSTALL_FILES_LIST}")
-    message("src_dir: ${src_dir}")
-    message("dest_dir: ${dest_dir}")
+    file(GLOB_RECURSE INSTALL_FILES_LIST "${src_dir}/*")
 
     # Create header-only install target.
     vrm_cmake_header_only_install("${INSTALL_FILES_LIST}" "${src_dir}" "${dest_dir}")
