@@ -312,7 +312,9 @@ macro(vrm_cmake_add_common_compiler_flags_safety)
 #{
     vrm_cmake_message("added common safety flags")
 
-    vrm_cmake_add_compiler_flag(HAS_PTHEAD                            -pthread)
+    vrm_cmake_add_compiler_flag(HAS_PTHREAD                           -pthread)
+    vrm_cmake_add_compiler_flag(HAS_LPTHREAD                          -lpthread)
+    vrm_cmake_add_compiler_flag(HAS_LM                                -lm)
     vrm_cmake_add_compiler_flag(HAS_PEDANTIC                          -pedantic)
     vrm_cmake_add_compiler_flag(HAS_STDCXX1Y                          -std=c++1y)
     vrm_cmake_add_compiler_flag(HAS_W                                 -W)
