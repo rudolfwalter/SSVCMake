@@ -307,6 +307,24 @@ macro(vrm_cmake_generate_public_header_tests_glob glob_pattern inc_dir)
 #}
 endmacro()
 
+# TODO
+macro(vrm_cmake_add_compiler_flag_pthread)
+#{
+    vrm_cmake_message("added common pthread flags")
+
+    vrm_cmake_add_compiler_flag(HAS_PTHREAD                           -pthread)
+#}
+endmacro()
+
+# TODO
+macro(vrm_cmake_link_pthread)
+#{
+    vrm_cmake_message("linking pthread")
+
+    target_link_libraries(${PROJECT_NAME} -lpthread)
+#}
+endmacro()
+
 # Adds common compiler safety/warning flags/definitions to the project.
 macro(vrm_cmake_add_common_compiler_flags_safety)
 #{
