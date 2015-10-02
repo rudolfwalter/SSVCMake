@@ -246,6 +246,9 @@ function(vrm_cmake_add_public_header_test header)
                             ${CMAKE_CURRENT_BINARY_DIR}/test.header.${_target})
 
     add_dependencies(tests test.header.${_target})
+
+    # Append generated targets    
+    list(append vrm_cmake_out ${_target})
 #}
 endfunction()
 
@@ -253,6 +256,9 @@ endfunction()
 macro(vrm_cmake_generate_public_header_tests header_list inc_dir)
 #{
     vrm_cmake_message("generatic public header tests")
+
+    # Clear result list\
+    set(vrm_cmake_out "")
 
     foreach(_header IN LISTS ${header_list})
     #{
@@ -268,6 +274,9 @@ macro(vrm_cmake_generate_unit_tests test_srcs)
 #{
     vrm_cmake_message("generating unit tests")
 
+    # Clear results list.
+    set(vrm_cmake_out "")
+
     foreach(_file IN LISTS ${test_srcs})
     #{
         file(READ "${_file}" _contents)
@@ -275,6 +284,9 @@ macro(vrm_cmake_generate_unit_tests test_srcs)
 
         add_executable(${_target} EXCLUDE_FROM_ALL "${_file}")
         vrm_cmake_add_unit_test(${_target} ${CMAKE_CURRENT_BINARY_DIR}/${_target})
+
+        # Append generated targets        
+        list(append vrm_cmake_out ${_target})
     #}
     endforeach()
 #}
