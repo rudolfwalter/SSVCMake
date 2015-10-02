@@ -248,7 +248,7 @@ function(vrm_cmake_add_public_header_test header)
     add_dependencies(tests test.header.${_target})
 
     # Append generated targets    
-    list(append vrm_cmake_out ${_target})
+    list(APPEND vrm_cmake_out ${_target})
 #}
 endfunction()
 
@@ -286,7 +286,7 @@ macro(vrm_cmake_generate_unit_tests test_srcs)
         vrm_cmake_add_unit_test(${_target} ${CMAKE_CURRENT_BINARY_DIR}/${_target})
 
         # Append generated targets        
-        list(append vrm_cmake_out ${_target})
+        list(APPEND vrm_cmake_out ${_target})
     #}
     endforeach()
 #}
