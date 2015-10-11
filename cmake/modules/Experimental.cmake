@@ -47,11 +47,11 @@ macro(vrm_cmake_init_project project_name)
 #}
 endmacro()
 
-# Initializes an option `{PROJECT_NAME_UPPER}_${name}`.
+# Initializes an option `${PROJECT_NAME_UPPER}_${name}`.
 # Description `desc` and default value `default`.
 macro(vrm_cmake_project_option name desc default)
 #{
-    option("{PROJECT_NAME_UPPER}_${name}" desc default)
+    option("${PROJECT_NAME_UPPER}_${name}" desc default)
 #}
 endmacro()
 
