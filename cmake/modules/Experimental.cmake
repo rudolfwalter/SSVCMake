@@ -255,7 +255,7 @@ endfunction()
 # Generate tests that include each public header.
 macro(vrm_cmake_generate_public_header_tests header_list inc_dir)
 #{
-    vrm_cmake_message("generatic public header tests")
+    vrm_cmake_message("generating public header tests")
 
     # Clear result list\
     set(vrm_cmake_out "")
